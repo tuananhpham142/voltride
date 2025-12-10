@@ -1,0 +1,31 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "types": [
+      "jest",
+      "node"
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "allowImportingTsExtensions": false,
+    "module": "esnext"
+  },
+  "include": [
+    // "**/*.ts",
+    // "**/*.tsx",
+    "./src/**/*",
+    "index.d.ts",
+    "jest.setup.js",
+    "jest.config.js",
+    "babel.config.js",
+    "index.js",
+    "nativewind-env.d.ts"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/Pods"
+  ],
+}
