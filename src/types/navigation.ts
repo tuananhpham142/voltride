@@ -4,29 +4,8 @@ import type { NativeStackNavigationProp, NativeStackScreenProps } from '@react-n
 import { CompositeNavigationProp, RouteProp } from '@react-navigation/native';
 
 export type RootStackParamList = AuthStackParamList & {
-  Auth: undefined;
-  Main: undefined;
-  Loading: undefined;
-  Home: undefined;
-
-  // Utility Screens
-  ImageViewer: {
-    images: string[];
-    initialIndex?: number;
-  };
-  // Settings
-  LanguageSettings: undefined;
-  NotificationsSettings: undefined;
-  PrivacySecuritySettings: undefined;
-  // Main App Routes
-  Profile: undefined;
-  Notifications: undefined;
-  Settings: undefined;
-  
-  // Bottom Tab Routes
-  Monthly: undefined;
-  Shop: undefined;
-  Scan: undefined;
+  Welcome: undefined;
+  Showcase: undefined;
 };
 
 export type RootScreenProps<S extends keyof RootStackParamList = keyof RootStackParamList> = NativeStackScreenProps<
@@ -47,11 +26,7 @@ export type AuthStackParamList = {
   VerifyIdentity: undefined;
 };
 export type MainTabParamList = {
-  Home: undefined;
-  Monthly: undefined;
-  Scan: undefined;
-  Shop: undefined;
-  Profile: undefined;
+  Welcome: undefined;
 };
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;

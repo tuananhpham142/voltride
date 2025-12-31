@@ -11,7 +11,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({}) => {
 
   const handleGetStarted = () => {
     // onGetStarted?.();
-    navigation.navigate('Home' as never);
+    navigation.navigate('Showcase' as never);
   };
 
   const handleSignIn = () => {

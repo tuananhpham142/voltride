@@ -2,11 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
 import { CustomBottomTabBar } from '@/components/template/Navigations/BottomNavigation';
-import HomeScreen from '@/screens/HomeScreen';
-import MonthlyScreen from '@/screens/MonthlyScreen';
-import ProfileScreen from '@/screens/ProfileScreen/ProfileScreen';
-import ScanScreen from '@/screens/ScanScreen';
-import ShopScreen from '@/screens/ShopScreen';
+import WelcomeScreen from '@/screens/WelcomeScreen';
 import { MainTabParamList } from '@/types/navigation';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -19,11 +15,7 @@ const BottomTabNavigator: React.FC = () => {
         headerShown: false,
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Monthly" component={MonthlyScreen} />
-      <Tab.Screen name="Scan" component={ScanScreen} />
-      <Tab.Screen name="Shop" component={ShopScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Welcome" component={WelcomeScreen} />
     </Tab.Navigator>
   );
 };
