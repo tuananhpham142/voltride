@@ -7,11 +7,11 @@ import { Appearance } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 const lightColors: ThemeColors = {
-  primary: '#007AFF',
-  secondary: '#5856D6',
+  primary: '#0B493A',
+  secondary: '#EAF06A',
   background: '#FFFFFF',
   surface: '#F2F2F7',
-  text: '#000000',
+  text: '#4E4E4E',
   textSecondary: '#8E8E93',
   border: '#C6C6C8',
   error: '#FF3B30',
@@ -20,8 +20,8 @@ const lightColors: ThemeColors = {
 };
 
 const darkColors: ThemeColors = {
-  primary: '#0A84FF',
-  secondary: '#5E5CE6',
+  primary: '#0B493A',
+  secondary: '#EAF06A',
   background: '#000000',
   surface: '#1C1C1E',
   text: '#FFFFFF',

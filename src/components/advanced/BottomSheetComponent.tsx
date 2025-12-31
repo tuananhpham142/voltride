@@ -1,22 +1,18 @@
-
 // src/components/advanced/BottomSheetComponent.tsx
 import { useTheme } from '@/hooks/useTheme';
 import BottomSheet, {
-    BottomSheetBackdrop,
-    BottomSheetBackdropProps,
-    BottomSheetFlatList,
-    BottomSheetFooter,
-    BottomSheetHandle,
-    BottomSheetScrollView,
-    BottomSheetTextInput,
-    BottomSheetView,
+  BottomSheetBackdrop,
+  BottomSheetBackdropProps,
+  BottomSheetFlatList,
+  BottomSheetFooter,
+  BottomSheetHandle,
+  BottomSheetScrollView,
+  BottomSheetView
 } from '@gorhom/bottom-sheet';
 import Icon from '@react-native-vector-icons/material-icons';
 import React, { memo, useCallback, useRef } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Button } from '../control/Button';
 import { BaseComponentProps } from '../types/common';
-import { borderRadius, fontSize } from '../utils/theme';
 
 // ============================================================================
 // BOTTOM SHEET COMPONENT
@@ -305,188 +301,3 @@ const styles = StyleSheet.create({
     borderTopColor: '#E0E0E0',
   },
 });
-
-// ============================================================================
-// PRE-BUILT BOTTOM SHEET VARIANTS
-// ============================================================================
-
-/**
- * ListBottomSheet - For selecting from a list of options
- */
-export interface ListBottomSheetProps extends Omit<BottomSheetComponentProps, 'children' | 'contentType'> {
-  items: Array<{
-    key: string;
-    title: string;
-    subtitle?: string;
-    icon?: string;
-    onPress: () => void;
-  }>;
-}
-
-export const ListBottomSheet = memo<ListBottomSheetProps>(({ items, ...props }) => {
-  const { colors } = useTheme();
-
-  return (
-    <BottomSheetComponent {...props} contentType="scrollView">
-      <View>
-        {items.map((item, index) => (
-          <TouchableOpacity
-            key={item.key}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingVertical: 16,
-              paddingHorizontal: 16,
-              borderBottomWidth: index < items.length - 1 ? 1 : 0,
-              borderBottomColor: colors.border,
-            }}
-            onPress={() => {
-              item.onPress();
-              props.onClose?.();
-            }}
-            activeOpacity={0.7}
-          >
-            {item.icon && (
-              <Icon
-                name={item.icon as any}
-                size={24}
-                color={colors.text}
-                style={{ marginRight: 16 }}
-              />
-            )}
-            <View style={{ flex: 1 }}>
-              <Text style={{ fontSize: 16, fontWeight: '500', color: colors.text }}>
-                {item.title}
-              </Text>
-              {item.subtitle && (
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: colors.textSecondary,
-                    marginTop: 2,
-                  }}
-                >
-                  {item.subtitle}
-                </Text>
-              )}
-            </View>
-            <Icon name="chevron-right" size={24} color={colors.textSecondary} />
-          </TouchableOpacity>
-        ))}
-      </View>
-    </BottomSheetComponent>
-  );
-});
-
-ListBottomSheet.displayName = 'ListBottomSheet';
-
-/**
- * FormBottomSheet - For forms with footer buttons
- */
-export interface FormBottomSheetProps extends Omit<BottomSheetComponentProps, 'footer'> {
-  primaryButtonText: string;
-  onPrimaryPress: () => void;
-  secondaryButtonText?: string;
-  onSecondaryPress?: () => void;
-  primaryButtonDisabled?: boolean;
-}
-
-export const FormBottomSheet = memo<FormBottomSheetProps>(({
-  primaryButtonText,
-  onPrimaryPress,
-  secondaryButtonText,
-  onSecondaryPress,
-  primaryButtonDisabled = false,
-  children,
-  ...props
-}) => {
-  const footer = (
-    <View style={{ gap: 12 }}>
-      <Button
-        title={primaryButtonText}
-        variant="primary"
-        size="md"
-        onPress={onPrimaryPress}
-        disabled={primaryButtonDisabled}
-        fullWidth
-      />
-      {secondaryButtonText && (
-        <Button
-          title={secondaryButtonText}
-          variant="outline"
-          size="md"
-          onPress={onSecondaryPress}
-          fullWidth
-        />
-      )}
-    </View>
-  );
-
-  return (
-    <BottomSheetComponent {...props} footer={footer}>
-      {children}
-    </BottomSheetComponent>
-  );
-});
-
-FormBottomSheet.displayName = 'FormBottomSheet';
-
-/**
- * SearchBottomSheet - With search input
- */
-export interface SearchBottomSheetProps extends Omit<BottomSheetComponentProps, 'children'> {
-  searchValue: string;
-  onSearchChange: (text: string) => void;
-  searchPlaceholder?: string;
-  children: React.ReactNode;
-}
-
-export const SearchBottomSheet = memo<SearchBottomSheetProps>(({
-  searchValue,
-  onSearchChange,
-  searchPlaceholder = 'Search...',
-  children,
-  ...props
-}) => {
-  const { colors, isDark } = useTheme();
-
-  return (
-    <BottomSheetComponent {...props}>
-      <View style={{ marginBottom: 16 }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            backgroundColor: isDark ? '#2A2A2A' : '#F5F5F5',
-            borderRadius: borderRadius.md,
-            paddingHorizontal: 12,
-            paddingVertical: 10,
-          }}
-        >
-          <Icon name="search" size={20} color={colors.textSecondary} />
-          <BottomSheetTextInput
-            value={searchValue}
-            onChangeText={onSearchChange}
-            placeholder={searchPlaceholder}
-            placeholderTextColor={colors.textSecondary}
-            style={{
-              flex: 1,
-              fontSize: fontSize.md,
-              color: colors.text,
-              marginLeft: 8,
-              paddingVertical: 0,
-            }}
-          />
-          {searchValue.length > 0 && (
-            <TouchableOpacity onPress={() => onSearchChange('')}>
-              <Icon name="close" size={18} color={colors.textSecondary} />
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-      {children}
-    </BottomSheetComponent>
-  );
-});
-
-SearchBottomSheet.displayName = 'SearchBottomSheet';

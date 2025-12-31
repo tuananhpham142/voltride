@@ -20,6 +20,7 @@ import {
   ColorPicker,
   ConfirmationModal,
   ContentSwitcher,
+  DateTimePicker,
   Divider,
   Dropdown,
   EmptyState,
@@ -110,7 +111,6 @@ const ShowcaseContent = () => {
   const [showToast, setShowToast] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [showActionSheet, setShowActionSheet] = useState(false);
-  const [accordionExpanded, setAccordionExpanded] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [chatMessage, setChatMessage] = useState('');
   const [cartQuantity, setCartQuantity] = useState(1);
@@ -129,7 +129,8 @@ const ShowcaseContent = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [stepperStep, setStepperStep] = useState(1);
   const [progressValue, setProgressValue] = useState(65);
-  
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
   // Bottom Sheet refs
   const bottomSheetRef = useRef<BottomSheet>(null);
   const listSheetRef = useRef<BottomSheet>(null);
@@ -247,6 +248,16 @@ const ShowcaseContent = () => {
               value={textValue}
               onChangeText={setTextValue}
               placeholder="Enter multiple lines..."
+            />
+
+            <DateTimePicker
+              value={date}
+              onChange={setDate}
+              visible={show}
+              onDismiss={() => setShow(false)}
+              mode="date"
+              title="Select Date"
+              maximumDate={new Date()}
             />
             
             <View>
