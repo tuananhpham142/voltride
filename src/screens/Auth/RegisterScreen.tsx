@@ -77,7 +77,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onVerifyPhone, onNaviga
           <View className='items-center mb-12 relative'>
             {/* Phone mockup */}
             <View
-              className='bg-blue-100 rounded-3xl border-4 border-white shadow-lg relative'
+              className='bg-primary-100 rounded-3xl border-4 border-white shadow-lg relative'
               style={{ width: width * 0.4, height: width * 0.65 }}
             >
               {/* Screen content placeholder */}
@@ -87,14 +87,14 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onVerifyPhone, onNaviga
             {/* Person illustration */}
             <View className='absolute z-10' style={{ right: width * 0.15, top: width * 0.1 }}>
               {/* Head */}
-              <View className='w-16 h-16 bg-blue-500 rounded-full mb-2 relative'>
-                <View className='absolute bottom-0 left-3 w-10 h-8 bg-blue-700 rounded-t-full' />
+              <View className='w-16 h-16 bg-primary rounded-full mb-2 relative'>
+                <View className='absolute bottom-0 left-3 w-10 h-8 bg-primary-700 rounded-t-full' />
               </View>
               {/* Body */}
-              <View className='w-12 h-20 bg-blue-600 rounded-t-2xl mx-auto' />
+              <View className='w-12 h-20 bg-primary rounded-t-2xl mx-auto' />
               {/* Arms */}
-              <View className='absolute top-16 -left-4 w-8 h-3 bg-blue-600 rounded-full transform -rotate-45' />
-              <View className='absolute top-16 -right-4 w-8 h-3 bg-blue-600 rounded-full transform rotate-45' />
+              <View className='absolute top-16 -left-4 w-8 h-3 bg-primary rounded-full transform -rotate-45' />
+              <View className='absolute top-16 -right-4 w-8 h-3 bg-primary rounded-full transform rotate-45' />
               {/* Legs */}
               <View className='flex-row justify-center flex gap-1 mt-1'>
                 <View className='w-3 h-12 bg-gray-800 rounded-b-lg' />
@@ -156,7 +156,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({ onVerifyPhone, onNaviga
           <TouchableOpacity
             onPress={handleVerify}
             disabled={isLoading}
-            className={`rounded-2xl py-4 mb-8 shadow-lg active:scale-95 ${isLoading ? 'bg-blue-400' : 'bg-blue-600'}`}
+            className={`rounded-2xl py-4 mb-8 shadow-lg active:scale-95 ${isLoading ? 'bg-primary' : 'bg-primary'}`}
             style={{
               shadowColor: '#3B82F6',
               shadowOffset: { width: 0, height: 4 },

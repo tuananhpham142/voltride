@@ -73,7 +73,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             {/* Ranking Button */}
             <TouchableOpacity
               onPress={onRankingPress}
-              className='bg-blue-100 rounded-2xl px-4 py-3 items-center w-1/2 shadow-sm'
+              className='bg-primary-100 rounded-2xl px-4 py-3 items-center w-1/2 shadow-sm'
               style={{
                 shadowColor: '#60A5FA',
                 shadowOffset: { width: 0, height: 2 },

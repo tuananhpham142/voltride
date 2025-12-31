@@ -14,14 +14,19 @@ export type RootStackParamList = AuthStackParamList & {
     images: string[];
     initialIndex?: number;
   };
-  // Notifications
-  Notifications: undefined;
   // Settings
-  Profile: undefined;
-  Settings: undefined;
   LanguageSettings: undefined;
   NotificationsSettings: undefined;
   PrivacySecuritySettings: undefined;
+  // Main App Routes
+  Profile: undefined;
+  Notifications: undefined;
+  Settings: undefined;
+  
+  // Bottom Tab Routes
+  Monthly: undefined;
+  Shop: undefined;
+  Scan: undefined;
 };
 
 export type RootScreenProps<S extends keyof RootStackParamList = keyof RootStackParamList> = NativeStackScreenProps<
@@ -30,21 +35,23 @@ export type RootScreenProps<S extends keyof RootStackParamList = keyof RootStack
 >;
 export type AuthStackParamList = {
   Welcome: undefined;
-  Login: undefined;
   Register: undefined;
   ForgotPassword: undefined;
   ThankyouRegister: undefined;
-  OTPVerification: undefined;
   CompleteProfile: undefined;
   SocialAuth: { provider: 'facebook' | 'google' | 'apple' };
+  Login: undefined;
+  OTPVerification: {
+    phoneNumber: string;
+  };
+  VerifyIdentity: undefined;
 };
-
 export type MainTabParamList = {
   Home: undefined;
+  Monthly: undefined;
+  Scan: undefined;
+  Shop: undefined;
   Profile: undefined;
-  Notifications: undefined;
-  Auth: undefined;
-  Settings: undefined;
 };
 
 export type RootStackNavigationProp = NativeStackNavigationProp<RootStackParamList>;

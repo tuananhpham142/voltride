@@ -5,7 +5,6 @@ import LoginScreen from '@/screens/Auth/LoginScreen';
 import OTPVerificationScreen from '@/screens/Auth/OTPVerificationScreen';
 import RegisterScreen from '@/screens/Auth/RegisterScreen';
 import ThankYouScreen from '@/screens/Auth/ThankyouScreen';
-import NotificationScreen from '@/screens/Notification/NotificationScreen';
 import EditProfileScreen from '@/screens/ProfileScreen/EditProfileScreen';
 import SettingsScreen from '@/screens/SettingScreen';
 import LanguageSettingsScreen from '@/screens/SettingScreen/LanguageSetting';
@@ -19,12 +18,12 @@ import { Platform } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { RootStackParamList } from '../types/navigation';
-import { TabbarNavigator } from './TabbarNavigator';
+import TabbarNavigator from './TabbarNavigator';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const AppNavigator: React.FC = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   // const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { isLoading } = useSelector((state: RootState) => state.auth);
 
@@ -52,9 +51,6 @@ export const AppNavigator: React.FC = () => {
         {isAuthenticated ? (
           <Stack.Group>
             <Stack.Screen name='Home' component={TabbarNavigator} />
-
-            {/* Notifications */}
-            <Stack.Screen name='Notifications' component={NotificationScreen} />
 
             {/* Settings */}
             <Stack.Screen name='Profile' component={EditProfileScreen} />

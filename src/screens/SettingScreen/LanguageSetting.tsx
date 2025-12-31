@@ -97,7 +97,7 @@ const LanguageSettingsScreen: React.FC<LanguageSettingsScreenProps> = ({ navigat
       </View>
 
       {language.isRTL && (
-        <View className='bg-blue-100 px-2 py-1 rounded mr-3'>
+        <View className='bg-primary-100 px-2 py-1 rounded mr-3'>
           <Text className='text-xs text-blue-600 font-medium'>RTL</Text>
         </View>
       )}

@@ -1,44 +1,37 @@
-import { useNavigation } from '@react-navigation/native';
+import { CustomButton } from '@/components/CustomButton';
+import { SocialButton } from '@/components/SocialButton';
+import { useTheme } from '@/hooks/useTheme';
+import { RootStackParamList } from '@/types/navigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Alert,
-  Dimensions,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-interface OTPVerificationProps {
-  phoneNumber?: string;
-  onVerifyOTP?: (otp: string) => void;
-  onResendOTP?: () => void;
-  onEditPhoneNumber?: () => void;
-}
+type Props = NativeStackScreenProps<RootStackParamList, 'OTPVerification'>;
 
-const OTPVerificationScreen: React.FC<OTPVerificationProps> = ({
-  phoneNumber = '9745xxxxxx',
-  onVerifyOTP,
-  onResendOTP,
-  onEditPhoneNumber,
-}) => {
-  const navigation = useNavigation();
-  const { width } = Dimensions.get('window');
-  const [otp, setOTP] = useState(['', '', '', '']);
+ const OTPVerificationScreen: React.FC<Props> = ({ navigation, route }) => {
+  const { isDark } = useTheme();
+  const { phoneNumber } = route.params;
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [isLoading, setIsLoading] = useState(false);
-  const [timer, setTimer] = useState(30);
-  const [canResend, setCanResend] = useState(false);
-
-  const otpRefs = useRef<(TextInput | null)[]>([]);
+  const [timer, setTimer] = useState(60);
+  const inputRefs = useRef<(TextInput | null)[]>([]);
 
   useEffect(() => {
-    // Timer for resend functionality
+    // Start countdown timer
     const interval = setInterval(() => {
-      setTimer((prev) => {
+      setTimer(prev => {
         if (prev <= 1) {
-          setCanResend(true);
+          clearInterval(interval);
           return 0;
         }
         return prev - 1;
@@ -48,149 +41,255 @@ const OTPVerificationScreen: React.FC<OTPVerificationProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    // Auto verify when all 4 digits are entered
-    if (otp.every((digit) => digit !== '')) {
-      handleVerifyOTP();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [otp]);
+  const handleOtpChange = (value: string, index: number) => {
+    if (isNaN(Number(value))) return;
 
-  const handleOTPChange = (value: string, index: number) => {
-    const newOTP = [...otp];
-    newOTP[index] = value;
-    setOTP(newOTP);
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
 
-    // Auto focus next input
-    if (value && index < 3) {
-      otpRefs.current[index + 1]?.focus();
+    // Auto-focus next input
+    if (value && index < 5) {
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
-  const handleVerifyOTP = async () => {
-    const otpString = otp.join('');
-    if (otpString.length !== 4) {
-      Alert.alert('Error', 'Please enter complete OTP');
+  const handleKeyPress = (e: any, index: number) => {
+    if (e.nativeEvent.key === 'Backspace' && !otp[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleVerify = async () => {
+    const otpCode = otp.join('');
+    if (otpCode.length !== 6) {
+      Alert.alert('Invalid OTP', 'Please enter the complete 6-digit code');
       return;
     }
 
-    setIsLoading(true);
     try {
-      onVerifyOTP?.(otpString);
-      navigation.navigate('CompleteProfile' as never);
+      setIsLoading(true);
+      // Add your OTP verification logic here
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
+      
+      // Navigate to next screen (e.g., Home or CompleteProfile)
+      navigation.navigate('Welcome');
     } catch (error) {
-      Alert.alert('Error', 'Invalid OTP. Please try again.');
-      setOTP(['', '', '', '']);
-      otpRefs.current[0]?.focus();
+      Alert.alert('Error', 'Invalid verification code. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
+  
+    const handleSocialAuth = (provider: 'github' | 'twitter' | 'google' | 'apple') => {
+      Alert.alert('Social Auth', `Authenticating with ${provider}`);
+      // Add your social authentication logic here
+    };
 
   const handleResend = () => {
-    if (canResend) {
-      onResendOTP?.();
-      setTimer(30);
-      setCanResend(false);
-      setOTP(['', '', '', '']);
-      otpRefs.current[0]?.focus();
-    }
+    if (timer > 0) return;
+    
+    Alert.alert('OTP Resent', 'A new verification code has been sent to your phone');
+    setTimer(60);
+    setOtp(['', '', '', '', '', '']);
   };
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className='flex-1 px-4 pt-16'>
-      <View>
-        {/* Illustration */}
-        <View className='items-center mb-8 relative'>
-          {/* Phone mockup */}
-          <View
-            className='bg-blue-100 rounded-3xl border-4 border-white shadow-lg relative'
-            style={{ width: width * 0.35, height: width * 0.55 }}
-          >
-            <View className='flex-1 bg-gray-100 rounded-2xl m-2' />
-          </View>
-
-          {/* Person illustration */}
-          <View className='absolute z-10' style={{ right: width * 0.18, top: width * 0.08 }}>
-            {/* Head */}
-            <View className='w-14 h-14 bg-blue-500 rounded-full mb-2 relative'>
-              <View className='absolute bottom-0 left-2 w-10 h-6 bg-blue-700 rounded-t-full' />
+    <SafeAreaView
+      className={`flex-1 ${isDark ? 'bg-gray-900' : 'bg-white'}`}
+    >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="flex-1"
+      >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          className="px-6"
+        >
+          <View className="flex-1 justify-center py-8">
+            {/* Header */}
+            <View className="mb-12">
+              <Text
+                className={`text-4xl font-bold mb-3 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}
+              >
+                Welcome Back
+              </Text>
+              <Text
+                className={`text-base ${
+                  isDark ? 'text-gray-400' : 'text-gray-600'
+                }`}
+              >
+                Sign in to start riding.
+              </Text>
             </View>
-            {/* Body */}
-            <View className='w-10 h-16 bg-blue-600 rounded-t-2xl mx-auto' />
-            {/* Arms */}
-            <View className='absolute top-14 -left-3 w-6 h-2 bg-blue-600 rounded-full transform -rotate-45' />
-            <View className='absolute top-14 -right-3 w-6 h-2 bg-blue-600 rounded-full transform rotate-45' />
-            {/* Legs */}
-            <View className='flex-row justify-center flex gap-1 mt-1'>
-              <View className='w-2 h-10 bg-gray-800 rounded-b-lg' />
-              <View className='w-2 h-10 bg-gray-800 rounded-b-lg' />
-            </View>
-            {/* Feet */}
-            <View className='flex-row justify-center flex gap-1 -mt-2'>
-              <View className='w-4 h-2 bg-yellow-500 rounded-full' />
-              <View className='w-4 h-2 bg-yellow-500 rounded-full' />
-            </View>
-          </View>
 
-          {/* Decorative plants */}
-          <View className='absolute' style={{ left: width * 0.1, bottom: width * 0.05 }}>
-            <View className='w-8 h-12 bg-green-400 rounded-t-full transform rotate-12' />
-            <View className='w-6 h-8 bg-green-500 rounded-t-full transform -rotate-12 -mt-6 ml-2' />
-          </View>
-
-          <View className='absolute' style={{ right: width * 0.08, bottom: width * 0.02 }}>
-            <View className='w-6 h-8 bg-green-500 rounded-t-full transform rotate-12' />
-            <View className='w-4 h-6 bg-green-600 rounded-t-full transform -rotate-12 -mt-4 ml-1' />
-          </View>
-        </View>
-
-        {/* Header */}
-        <View className='mb-6'>
-          <Text className='text-3xl font-bold text-gray-900 text-center mb-3'>Verify account</Text>
-          <View className='flex-row items-center justify-center'>
-            <Text className='text-gray-500 text-base'>Enter OTP sent to {phoneNumber}</Text>
-            <TouchableOpacity onPress={onEditPhoneNumber} className='ml-2 p-1'>
-              <Text className='text-blue-600 text-lg'>✏️</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* OTP Input Boxes */}
-        <View className='flex-row justify-center gap-4 mb-4'>
-          {otp.map((digit, index) => (
+            {/* Tab Selector */}
             <View
-              key={index}
-              className='w-18 h-18 bg-white rounded-lg border-2 border-gray-200 justify-center items-center shadow-sm'
+              className={`flex-row p-1 rounded-2xl mb-6 ${
+                isDark ? 'bg-gray-800' : 'bg-gray-100'
+              }`}
             >
-              <TextInput
-                ref={(ref) => {
-                  otpRefs.current[index] = ref;
-                }}
-                value={digit}
-                onChangeText={(value) => handleOTPChange(value.slice(-1), index)}
-                keyboardType='numeric'
-                autoFocus
-                onSubmitEditing={handleVerifyOTP}
-                maxLength={1}
-                className='text-xl font-bold text-gray-900 text-center w-full h-full'
-                style={{ textAlignVertical: 'center' }}
-                showSoftInputOnFocus={false}
-              />
-              {digit === '' && <Text className='absolute text-2xl text-gray-200'>-</Text>}
+              <View className="flex-1 bg-gray-700 rounded-xl py-3">
+                <Text className="text-white text-center font-semibold">
+                  Phone Number
+                </Text>
+              </View>
+              <View className="flex-1 rounded-xl py-3">
+                <Text
+                  className={`text-center font-semibold ${
+                    isDark ? 'text-gray-400' : 'text-gray-600'
+                  }`}
+                >
+                  Email
+                </Text>
+              </View>
             </View>
-          ))}
-        </View>
 
-        {/* Resend Link */}
-        <TouchableOpacity onPress={handleResend} disabled={!canResend} className='mb-8 py-2'>
-          <Text className={`text-center font-medium ${canResend ? 'text-blue-600' : 'text-gray-400'}`}>
-            {canResend ? 'Resend' : `Resend in ${timer}s`}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+            {/* Phone Number Display */}
+            <View className="mb-6">
+              <Text
+                className={`text-sm font-medium mb-3 ${
+                  isDark ? 'text-gray-400' : 'text-gray-600'
+                }`}
+              >
+                Phone Number
+              </Text>
+              <View
+                className={`rounded-2xl border px-4 py-4 ${
+                  isDark
+                    ? 'bg-gray-800/50 border-gray-700'
+                    : 'bg-white border-gray-200'
+                }`}
+              >
+                <Text
+                  className={`text-base ${
+                    isDark ? 'text-white' : 'text-gray-900'
+                  }`}
+                >
+                  {phoneNumber}
+                </Text>
+              </View>
+            </View>
+
+            {/* OTP Input */}
+            <View className="mb-8">
+              <Text
+                className={`text-sm font-medium mb-3 ${
+                  isDark ? 'text-gray-400' : 'text-gray-600'
+                }`}
+              >
+                One-Time Password
+              </Text>
+              <View
+                className={`rounded-2xl border px-6 py-6 ${
+                  isDark
+                    ? 'bg-gradient-to-r from-teal-500/10 to-teal-500/5 border-teal-500/30'
+                    : 'bg-teal-50 border-teal-200'
+                }`}
+              >
+                <View className="flex-row justify-between">
+                  {otp.map((digit, index) => (
+                    <TextInput
+                      key={index}
+                      //@ts-ignore
+                      ref={ref => (inputRefs.current[index] = ref)}
+                      value={digit}
+                      onChangeText={value => handleOtpChange(value, index)}
+                      onKeyPress={e => handleKeyPress(e, index)}
+                      keyboardType="number-pad"
+                      placeholder='-'
+                      maxLength={1}
+                      className={`text-center text-2xl font-bold ${
+                        isDark ? 'text-white' : 'text-gray-900'
+                      }`}
+                      style={{ width: 40 }}
+                    />
+                  ))}
+                </View>
+              </View>
+
+              {/* Resend Timer */}
+              <View className="mt-3 flex-row justify-center">
+                {timer > 0 ? (
+                  <Text
+                    className={`text-sm ${
+                      isDark ? 'text-gray-400' : 'text-gray-500'
+                    }`}
+                  >
+                    Resend code in {timer}s
+                  </Text>
+                ) : (
+                  <TouchableOpacity onPress={handleResend}>
+                    <Text className="text-sm text-primary-300 font-semibold">
+                      Resend Code
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
+
+            {/* Verify Button */}
+            <CustomButton
+              title="Verify & Login"
+              onPress={handleVerify}
+              isLoading={isLoading}
+              icon="arrow-right"
+              className="mb-8"
+            />
+
+            {/* Social Login Buttons */}
+            <View className="mb-8">
+              <View className="flex-row items-center mb-4">
+                <View
+                  className={`flex-1 h-px ${
+                    isDark ? 'bg-gray-700' : 'bg-gray-200'
+                  }`}
+                />
+                <Text
+                  className={`mx-4 text-sm ${
+                    isDark ? 'text-gray-400' : 'text-gray-500'
+                  }`}
+                >
+                  Or continue with
+                </Text>
+                <View
+                  className={`flex-1 h-px ${
+                    isDark ? 'bg-gray-700' : 'bg-gray-200'
+                  }`}
+                />
+              </View>
+
+             <View className="flex-row gap-4 mb-8">
+                       <SocialButton
+                         provider="github"
+                         onPress={() => handleSocialAuth('github')}
+                       />
+                       <SocialButton
+                         provider="twitter"
+                         onPress={() => handleSocialAuth('twitter')}
+                       />
+                     </View>
+            </View>
+
+            {/* Terms */}
+            <Text
+              className={`text-xs text-center leading-5 ${
+                isDark ? 'text-gray-500' : 'text-gray-400'
+              }`}
+            >
+              By continuing you agree to our{' '}
+              <Text className="text-primary-300">Terms</Text> &{' '}
+              <Text className="text-primary-300">Privacy Policy</Text>.
+            </Text>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
-};
+ };
 
-export default OTPVerificationScreen;
+ export default OTPVerificationScreen

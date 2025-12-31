@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Dimensions, SafeAreaView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface WelcomeScreenProps {}
 
@@ -25,7 +26,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({}) => {
       <View className='flex-1 px-4 pt-12'>
         {/* Top Navigation Dot */}
         <View className='flex-row justify-start mb-8'>
-          <View className='w-3 h-3 bg-blue-600 rounded-full' />
+          <View className='w-3 h-3 bg-primary rounded-full' />
         </View>
 
         {/* Decorative Elements */}
@@ -51,12 +52,12 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({}) => {
               left: width * 0.05,
             }}
           >
-            <View className='w-8 h-8 bg-blue-500 rounded-full' />
+            <View className='w-8 h-8 bg-primary rounded-full' />
           </View>
 
           {/* Small Blue Circle */}
           <View
-            className='absolute bg-blue-400 rounded-full shadow-sm'
+            className='absolute bg-primary rounded-full shadow-sm'
             style={{
               width: width * 0.15,
               height: width * 0.15,
@@ -84,7 +85,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({}) => {
 
           {/* Progress Indicator */}
           <View className='flex-row justify-center mb-12'>
-            <View className='w-8 h-1 bg-blue-600 rounded-full mr-1' />
+            <View className='w-8 h-1 bg-primary rounded-full mr-1' />
             <View className='w-8 h-1 bg-gray-200 rounded-full mr-1' />
             <View className='w-8 h-1 bg-gray-200 rounded-full' />
           </View>
@@ -92,7 +93,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({}) => {
           {/* Get Started Button */}
           <TouchableOpacity
             onPress={handleGetStarted}
-            className='bg-blue-600 rounded-2xl py-4 mb-6 shadow-lg active:scale-95'
+            className='bg-primary rounded-2xl py-4 mb-6 shadow-lg active:scale-95'
             style={{
               shadowColor: '#3B82F6',
               shadowOffset: { width: 0, height: 4 },
@@ -105,7 +106,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({}) => {
 
           {/* Sign In Link */}
           <TouchableOpacity onPress={handleSignIn} className='py-2 active:opacity-70'>
-            <Text className='text-blue-600 text-base font-medium text-center'>Sign In</Text>
+            <Text className='text-primary text-base font-medium text-center'>Sign In</Text>
           </TouchableOpacity>
         </View>
       </View>

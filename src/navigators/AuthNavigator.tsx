@@ -33,7 +33,6 @@ export const AuthNavigator: React.FC = () => {
       <Stack.Screen name='Register' component={RegisterScreen} />
       <Stack.Screen name='OTPVerification' component={OTPVerificationScreen} />
       <Stack.Screen name='CompleteProfile' component={CompleteProfileScreen} />
-      {/* <Stack.Screen name='ForgotPassword' component={ForgotPasswordScreen} /> */}
     </Stack.Navigator>
   );
 };

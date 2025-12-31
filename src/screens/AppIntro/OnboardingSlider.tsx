@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useRef, useState } from 'react';
-import { Animated, SafeAreaView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { AcceptTripIcon } from './icons/AcceptTripIcon';
 import { DeliveryIcon } from './icons/DeliveryIcon';
 import { EarnMoneyIcon } from './icons/EarnMoneyIcon';

@@ -93,7 +93,7 @@ const ThankYouScreen: React.FC<ThankYouScreenProps> = ({
     <Animated.View className='flex-1 px-4 pt-16' style={{ opacity: fadeAnim }}>
       {/* Top Navigation Dot */}
       <View className='flex-row justify-start mb-8'>
-        <View className='w-3 h-3 bg-blue-600 rounded-full' />
+        <View className='w-3 h-3 bg-primary rounded-full' />
       </View>
 
       {/* Decorative Elements */}
@@ -146,7 +146,7 @@ const ThankYouScreen: React.FC<ThankYouScreenProps> = ({
 
         {/* Blue Circle */}
         <View
-          className='absolute bg-blue-400 rounded-full shadow-sm'
+          className='absolute bg-primary rounded-full shadow-sm'
           style={{
             width: width * 0.15,
             height: width * 0.15,
@@ -203,15 +203,15 @@ const ThankYouScreen: React.FC<ThankYouScreenProps> = ({
 
         {/* Progress Indicator */}
         <View className='flex-row justify-center mb-12'>
-          <View className='w-8 h-1 bg-blue-600 rounded-full mr-1' />
-          <View className='w-8 h-1 bg-blue-600 rounded-full mr-1' />
-          <View className='w-8 h-1 bg-blue-600 rounded-full' />
+          <View className='w-8 h-1 bg-primary rounded-full mr-1' />
+          <View className='w-8 h-1 bg-primary rounded-full mr-1' />
+          <View className='w-8 h-1 bg-primary rounded-full' />
         </View>
 
         {/* Go to Dashboard Button */}
         <TouchableOpacity
           onPress={handleGoToDashboard}
-          className='bg-blue-600 rounded-2xl py-4 mb-6 shadow-lg active:scale-95'
+          className='bg-primary rounded-2xl py-4 mb-6 shadow-lg active:scale-95'
           style={{ shadowColor: '#3B82F6', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8 }}
         >
           <Text className='text-white text-lg font-semibold text-center'>Go to Dashboard</Text>

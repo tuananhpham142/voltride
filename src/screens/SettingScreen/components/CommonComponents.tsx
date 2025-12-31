@@ -27,7 +27,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 //   textColor = '#374151',
 //   borderColor = '#E5E7EB',
 // }) => (
-//   <SafeAreaView style={{ backgroundColor }}>
+//   <SafeAreaViewstyle={{ backgroundColor }}>
 //     <View
 //       className='flex-row items-center justify-between px-4 py-3 border-b'
 //       style={{ borderBottomColor: borderColor }}
@@ -49,7 +49,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 //           {rightButtonIcon ? (
 //             <Icon iconStyle='solid' name={rightButtonIcon as any} size={20} color='#3B82F6' />
 //           ) : (
-//             <Text className='text-blue-500 font-medium'>{rightButtonText}</Text>
+//             <Text className='text-primary-300 font-medium'>{rightButtonText}</Text>
 //           )}
 //         </TouchableOpacity>
 //       ) : (
@@ -223,7 +223,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({ icon, title, subtitle, a
     <Text className='text-xl font-semibold text-gray-700 mt-4 text-center'>{title}</Text>
     {subtitle && <Text className='text-gray-500 text-center mt-2 leading-6'>{subtitle}</Text>}
     {actionText && onActionPress && (
-      <TouchableOpacity className='bg-blue-500 px-6 py-3 rounded-lg mt-6' onPress={onActionPress}>
+      <TouchableOpacity className='bg-primary px-6 py-3 rounded-lg mt-6' onPress={onActionPress}>
         <Text className='text-white font-semibold'>{actionText}</Text>
       </TouchableOpacity>
     )}
@@ -249,7 +249,7 @@ export const InfoCard: React.FC<InfoCardProps> = ({ icon, title, message, type =
       case 'error':
         return { bg: 'bg-red-50', icon: '#EF4444', title: 'text-red-900', text: 'text-red-700' };
       default:
-        return { bg: 'bg-blue-50', icon: '#3B82F6', title: 'text-blue-900', text: 'text-blue-700' };
+        return { bg: 'bg-primary-50', icon: '#3B82F6', title: 'text-blue-900', text: 'text-blue-700' };
     }
   };
 

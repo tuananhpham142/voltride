@@ -2,15 +2,15 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
-    Animated,
-    Dimensions,
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  Animated,
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface NotFoundProps {
   type?: 'page' | 'article' | 'category' | 'general';

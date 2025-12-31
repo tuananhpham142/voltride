@@ -239,7 +239,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ isVisible, onClose, navigation 
     >
       <View
         className={`w-12 h-12 rounded-full items-center justify-center mr-4 ${
-          item.isDanger ? 'bg-red-100' : 'bg-blue-100'
+          item.isDanger ? 'bg-red-100' : 'bg-primary-100'
         }`}
       >
         <Icon iconStyle='solid' name={item.icon as any} size={24} color={item.isDanger ? '#EF4444' : '#3B82F6'} />

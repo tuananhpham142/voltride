@@ -111,7 +111,7 @@ const CompleteProfileScreen: React.FC<CompleteProfileScreenProps> = ({ onComplet
           <View className='items-center mb-8 relative'>
             {/* Phone mockup */}
             <View
-              className='bg-blue-100 rounded-3xl border-4 border-white shadow-lg relative'
+              className='bg-primary-100 rounded-3xl border-4 border-white shadow-lg relative'
               style={{ width: width * 0.35, height: width * 0.55 }}
             >
               <View className='flex-1 bg-gray-100 rounded-2xl m-2' />
@@ -120,14 +120,14 @@ const CompleteProfileScreen: React.FC<CompleteProfileScreenProps> = ({ onComplet
             {/* Person illustration */}
             <View className='absolute z-10' style={{ right: width * 0.18, top: width * 0.08 }}>
               {/* Head */}
-              <View className='w-14 h-14 bg-blue-500 rounded-full mb-2 relative'>
-                <View className='absolute bottom-0 left-2 w-10 h-6 bg-blue-700 rounded-t-full' />
+              <View className='w-14 h-14 bg-primary rounded-full mb-2 relative'>
+                <View className='absolute bottom-0 left-2 w-10 h-6 bg-primary-700 rounded-t-full' />
               </View>
               {/* Body */}
-              <View className='w-10 h-16 bg-blue-600 rounded-t-2xl mx-auto' />
+              <View className='w-10 h-16 bg-primary rounded-t-2xl mx-auto' />
               {/* Arms */}
-              <View className='absolute top-14 -left-3 w-6 h-2 bg-blue-600 rounded-full transform -rotate-45' />
-              <View className='absolute top-14 -right-3 w-6 h-2 bg-blue-600 rounded-full transform rotate-45' />
+              <View className='absolute top-14 -left-3 w-6 h-2 bg-primary rounded-full transform -rotate-45' />
+              <View className='absolute top-14 -right-3 w-6 h-2 bg-primary rounded-full transform rotate-45' />
               {/* Legs */}
               <View className='flex flex-row justify-center gap-1 mt-1'>
                 <View className='w-2 h-10 bg-gray-800 rounded-b-lg' />
@@ -162,7 +162,7 @@ const CompleteProfileScreen: React.FC<CompleteProfileScreenProps> = ({ onComplet
           <View className='mb-8'>
             {/* Name Input */}
             <View className='mb-6'>
-              <Text className='text-blue-500 text-sm font-medium mb-2 ml-1'>My name</Text>
+              <Text className='text-primary-300 text-sm font-medium mb-2 ml-1'>My name</Text>
               <View className='bg-white rounded-2xl border border-gray-200 shadow-sm'>
                 <TextInput
                   value={formData.name}
@@ -177,7 +177,7 @@ const CompleteProfileScreen: React.FC<CompleteProfileScreenProps> = ({ onComplet
 
             {/* Nickname Input (Optional) */}
             <View className='mb-6'>
-              <Text className='text-blue-500 text-sm font-medium mb-2 ml-1'>Nickname (Optional)</Text>
+              <Text className='text-primary-300 text-sm font-medium mb-2 ml-1'>Nickname (Optional)</Text>
               <View className='bg-white rounded-2xl border border-gray-200 shadow-sm'>
                 <TextInput
                   value={formData.nickname}
@@ -191,7 +191,7 @@ const CompleteProfileScreen: React.FC<CompleteProfileScreenProps> = ({ onComplet
 
             {/* Date of Birth Input */}
             <View className='mb-6'>
-              <Text className='text-blue-500 text-sm font-medium mb-2 ml-1'>Wish me on</Text>
+              <Text className='text-primary-300 text-sm font-medium mb-2 ml-1'>Wish me on</Text>
               <TouchableOpacity
                 onPress={showDatePickerModal}
                 className='bg-white rounded-2xl border border-gray-200 shadow-sm'
@@ -227,7 +227,7 @@ const CompleteProfileScreen: React.FC<CompleteProfileScreenProps> = ({ onComplet
                   onPress={() => handleGenderSelect('male')}
                   className={`flex-1 py-4 px-4 rounded-2xl border-2 flex-row items-center justify-center active:scale-95 ${
                     formData.gender === 'male'
-                      ? 'bg-blue-600 border-blue-600 shadow-lg'
+                      ? 'bg-primary border-blue-600 shadow-lg'
                       : 'bg-white border-gray-200 shadow-sm'
                   }`}
                   style={
@@ -282,7 +282,7 @@ const CompleteProfileScreen: React.FC<CompleteProfileScreenProps> = ({ onComplet
             <TouchableOpacity
               onPress={handleConfirmDetails}
               disabled={isLoading}
-              className={`rounded-2xl py-4 shadow-lg active:scale-95 ${isLoading ? 'bg-blue-400' : 'bg-blue-600'}`}
+              className={`rounded-2xl py-4 shadow-lg active:scale-95 ${isLoading ? 'bg-primary' : 'bg-primary'}`}
               style={{
                 shadowColor: '#3B82F6',
                 shadowOffset: { width: 0, height: 4 },

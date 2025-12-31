@@ -236,7 +236,7 @@ const EditProfileScreen: React.FC = () => {
             />
             <TouchableOpacity
               onPress={handlePickImage}
-              className='absolute bottom-0 right-0 w-10 h-10 bg-blue-500 rounded-full items-center justify-center border-4 border-white'
+              className='absolute bottom-0 right-0 w-10 h-10 bg-primary rounded-full items-center justify-center border-4 border-white'
               disabled={isUploadingAvatar}
             >
               {isUploadingAvatar ? (
@@ -284,16 +284,16 @@ const EditProfileScreen: React.FC = () => {
                   key={option.value}
                   onPress={() => setFormData({ ...formData, gender: option.value })}
                   className={`flex-1 py-3.5 rounded-xl border ${
-                    formData.gender === option.value ? 'bg-blue-50 border-blue-500' : 'bg-white border-gray-200'
+                    formData.gender === option.value ? 'bg-primary-50 border-primary-300' : 'bg-white border-gray-200'
                   }`}
                 >
                   <View className='flex-row items-center justify-center'>
                     <View
                       className={`w-5 h-5 rounded-full border-2 mr-2 items-center justify-center ${
-                        formData.gender === option.value ? 'border-blue-500' : 'border-gray-300'
+                        formData.gender === option.value ? 'border-primary-300' : 'border-gray-300'
                       }`}
                     >
-                      {formData.gender === option.value && <View className='w-3 h-3 rounded-full bg-blue-500' />}
+                      {formData.gender === option.value && <View className='w-3 h-3 rounded-full bg-primary' />}
                     </View>
                     <Text
                       className={`font-medium ${formData.gender === option.value ? 'text-blue-600' : 'text-gray-700'}`}
@@ -361,7 +361,7 @@ const EditProfileScreen: React.FC = () => {
           <TouchableOpacity
             onPress={handleSave}
             disabled={isUpdating}
-            className='bg-blue-500 rounded-xl py-4 items-center justify-center mb-8 shadow-sm'
+            className='bg-primary rounded-xl py-4 items-center justify-center mb-8 shadow-sm'
             activeOpacity={0.8}
           >
             {isUpdating ? (
