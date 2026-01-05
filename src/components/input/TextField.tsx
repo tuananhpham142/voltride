@@ -1,21 +1,21 @@
 
-// src/components/input/TextInputs.tsx
+// src/components/input/TextField.tsx
 import { useTheme } from '@/hooks/useTheme';
 import Icon from '@react-native-vector-icons/material-icons';
 import React, { memo, useState } from 'react';
 import {
-    TextInput as RNTextInput,
-    TextInputProps as RNTextInputProps,
-    Text,
-    TextStyle,
-    TouchableOpacity,
-    View,
-    ViewStyle,
+  TextInput as RNTextInput,
+  TextInputProps as RNTextInputProps,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
 import Animated, {
-    useAnimatedStyle,
-    useSharedValue,
-    withTiming,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
 import { BaseComponentProps, StyleProps } from '../types/common';
 import { borderRadius, fontSize } from '../utils/theme';
@@ -314,14 +314,3 @@ export const TextField = memo<TextFieldProps>(({
 });
 
 TextField.displayName = 'TextField';
-
-/**
- * TextArea Component  
- * 
- * A multiline text input field.
- */
-export const TextArea = memo<TextFieldProps>((props) => {
-  return <TextField {...props} multiline />;
-});
-
-TextArea.displayName = 'TextArea';

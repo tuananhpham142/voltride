@@ -1,0 +1,25 @@
+// src/models/Trip/TripEnum.ts
+
+export enum TripStatus {
+  ASSIGNED = 'ASSIGNED',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  PARTIALLY_COMPLETED = 'PARTIALLY_COMPLETED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum TripPriority {
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  URGENT = 'URGENT',
+}
+
+export enum TripType {
+  STANDARD = 'STANDARD',
+  EXPRESS = 'EXPRESS',
+  SCHEDULED = 'SCHEDULED',
+  RETURN = 'RETURN',
+}

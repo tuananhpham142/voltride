@@ -4,9 +4,9 @@ import Icon from '@react-native-vector-icons/material-icons';
 import React, { memo } from 'react';
 import { Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated, {
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring
 } from 'react-native-reanimated';
 import { BaseComponentProps, Size, StyleProps } from '../types/common';
 import { borderRadius } from '../utils/theme';

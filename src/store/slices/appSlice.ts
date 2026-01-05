@@ -13,7 +13,7 @@ const initialState: AppState = {
 };
 
 // Async thunks
-export const initializeApp = createAsyncThunk('app/initialize', async (_, {  }) => {
+export const initializeApp = createAsyncThunk('app/initialize', async (_, {}) => {
   try {
     const appVersion = DeviceInfo.getVersion();
     const buildNumber = DeviceInfo.getBuildNumber();

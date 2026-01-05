@@ -1,5 +1,15 @@
 // src/navigation/AppNavigator.tsx
 import { LoadingScreen } from '@/components/LoadingScreen';
+import {
+  CODPaymentScreen,
+  DashboardScreen,
+  DeliveryCompleteScreen,
+  DeliveryPointScreen,
+  PODCaptureScreen,
+  TripDetailScreen,
+  TripListScreen,
+  TripNavigationScreen,
+} from '@/screens';
 import AllComponentsShowcase from '@/screens/AllComponentsShowcase';
 import WelcomeScreen from '@/screens/WelcomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -38,6 +48,14 @@ export const AppNavigator: React.FC = () => {
         <Stack.Screen name='Welcome' component={WelcomeScreen} />
         <Stack.Screen name='Showcase' component={AllComponentsShowcase} />
 
+        <Stack.Screen name='Dashboard' component={DashboardScreen} />
+        <Stack.Screen name='TripList' component={TripListScreen} />
+        <Stack.Screen name='TripDetail' component={TripDetailScreen} />
+        <Stack.Screen name='TripNavigation' component={TripNavigationScreen} />
+        <Stack.Screen name='DeliveryPoint' component={DeliveryPointScreen} />
+        <Stack.Screen name='PODCapture' component={PODCaptureScreen} />
+        <Stack.Screen name='CODPayment' component={CODPaymentScreen} />
+        <Stack.Screen name='DeliveryComplete' component={DeliveryCompleteScreen} />
         {/* {isAuthenticated ? (
           <Stack.Group>
             <Stack.Screen name='Home' component={TabbarNavigator} />

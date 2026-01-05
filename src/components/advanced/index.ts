@@ -40,6 +40,3 @@ export * from './ColorPicker';
 
 // OTPInput
 export * from './OTPInput';
-
-// Timeline
-export * from './Timeline';
